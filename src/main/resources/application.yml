@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: wishlist-api
+  data:
+    mongodb:
+      host: ${MONGO_HOST:localhost}
+      database: ${MONGO_DB:wishlistDB}
+      port: 27017
