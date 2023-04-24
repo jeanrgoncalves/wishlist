@@ -6,3 +6,6 @@ spring:
       host: ${MONGO_HOST:localhost}
       database: ${MONGO_DB:wishlistDB}
       port: 27017
+
+server:
+  port: 8085

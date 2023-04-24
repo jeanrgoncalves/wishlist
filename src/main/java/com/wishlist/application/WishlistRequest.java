@@ -3,7 +3,7 @@ package com.wishlist.application;
 import lombok.Data;
 
 @Data
-public class WishlistAddProductRequest {
+public class WishlistRequest {
 
     private String productId;
     private String clientId;

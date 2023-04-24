@@ -1,7 +1,6 @@
 package com.wishlist.application;
 
 import com.wishlist.domain.product.Product;
-import com.wishlist.domain.product.ProductRepository;
 import com.wishlist.exception.WishlistMaxSizeException;
 import com.wishlist.service.wishlist.WishlistService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,19 +9,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
-@RestController("/api/v1/wishlists")
+@RestController("/api/v1/wishlists/products")
 @RequiredArgsConstructor
 public class WishlistController {
-
-    private final ProductRepository productRepository;
     private final WishlistService service;
 
     @GetMapping
@@ -36,14 +30,14 @@ public class WishlistController {
         throw new WishlistMaxSizeException();
     }
 
-    @PostMapping(path = "/products")
-    @Operation(summary = "Adiciona um produto na Wishlist no cliente informado.")
+    @PostMapping
+    @Operation(summary = "Adiciona um produto na Wishlist do cliente informado.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Produto adicionado com sucesso."),
             @ApiResponse(responseCode = "400", description = "Requisição inválida ou tamanho máximo (20) da Wishlist atingido.", content = @Content),
             @ApiResponse(responseCode = "404", description = "Produto ou cliente não encontrado.", content = @Content),
     })
-    public ResponseEntity<WishlistDto> addProduct(@RequestBody WishlistAddProductRequest request) {
+    public ResponseEntity<WishlistDto> addProduct(@RequestBody WishlistRequest request) {
         var wishlist =  service.addProduct(request.getProductId(), request.getClientId());
         var dto = WishlistDto.from(wishlist);
 
@@ -52,6 +46,17 @@ public class WishlistController {
                 .path(request.getClientId())
                 .build().toUri();
         return ResponseEntity.created(uri).body(dto);
+    }
+
+    @DeleteMapping
+    @Operation(summary = "Remove um produto da Wishlist do cliente informado.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Produto removido com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Wishlist não encontrada.", content = @Content),
+    })
+    public ResponseEntity<Void> removeProduct(@RequestBody WishlistRequest request) {
+        service.removeProduct(request.getProductId(), request.getClientId());
+        return ResponseEntity.ok().build();
     }
 
 }

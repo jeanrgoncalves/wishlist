@@ -6,4 +6,5 @@ public interface WishlistService {
 
     Wishlist addProduct(String productId, String clientId);
 
+    void removeProduct(String productId, String clientId);
 }

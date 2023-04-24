@@ -49,4 +49,9 @@ public class Wishlist {
         products.add(product);
     }
 
+    public void removeProduct(String productId) {
+        products.removeIf(p -> p.getId().equals(productId));
+        log.info("Produto com id {} removido da Wishlist do cliente com id {}", productId, clientId);
+    }
+
 }
