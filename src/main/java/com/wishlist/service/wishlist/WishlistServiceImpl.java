@@ -58,5 +58,28 @@ public class WishlistServiceImpl implements WishlistService {
         }
     }
 
+    @Override
+    public Wishlist findByClientId(String clientId) {
+        log.info("Iniciando processo para listar os produtos da Wishlist do cliente com id {}", clientId);
+
+        var wishlist = executeFindByClientId(clientId);
+
+        log.info("Wishlist do cliente com id {} encontrada, devolvendo a lista de produtos", clientId);
+        return wishlist;
+    }
+
+    @Override
+    public Boolean checkProductExists(String productId, String clientId) {
+        log.info("Iniciando processo para verificar se o produto com id {} existe na Wishlist do cliente com id {}", productId, clientId);
+        var wishlist = executeFindByClientId(clientId);
+        return wishlist.checkProductExists(productId);
+    }
+
+    private Wishlist executeFindByClientId(String clientId) {
+        return repository.findByClientId(clientId).orElseGet(() -> {
+            log.error("Wishlist não encontrada para o cliente com id {}", clientId);
+            throw new WishlistNotFoundException();
+        });
+    }
 
 }

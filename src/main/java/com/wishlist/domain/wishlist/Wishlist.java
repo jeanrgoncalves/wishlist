@@ -50,8 +50,20 @@ public class Wishlist {
     }
 
     public void removeProduct(String productId) {
-        products.removeIf(p -> p.getId().equals(productId));
-        log.info("Produto com id {} removido da Wishlist do cliente com id {}", productId, clientId);
+        if (products.removeIf(p -> p.getId().equals(productId)))
+            log.info("Produto com id {} removido da Wishlist do cliente com id {}", productId, clientId);
+        else
+            log.info("Produto com id {} não foi encontrado na Wishlist do cliente com id {}", productId, clientId);
+    }
+
+    public Boolean checkProductExists(String productId) {
+        if (products.stream().anyMatch(p -> p.getId().equals(productId))) {
+            log.info("Produto com id {} encontrado na Wishlist do cliente com id {}", productId, clientId);
+            return true;
+        } else {
+            log.info("Produto com id {} não encontrado na Wishlist do cliente com id {}", productId, clientId);
+            return false;
+        }
     }
 
 }
