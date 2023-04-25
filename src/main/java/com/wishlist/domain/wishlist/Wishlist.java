@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Document(collection = "wishlists")
@@ -33,7 +32,8 @@ public class Wishlist {
 
     public void addProduct(Product product) {
         if (products == null) {
-            products = Collections.singletonList(product);
+            products = new ArrayList<>(); //lista mutável para utilizar nos testes
+            products.add(product);
             return;
         }
 
