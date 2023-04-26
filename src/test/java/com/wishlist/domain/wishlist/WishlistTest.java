@@ -102,7 +102,6 @@ public class WishlistTest {
         wishlist.addProduct(product);
 
         Assertions.assertFalse(wishlist.checkProductExists("6287ec4ac0e188e8df242f78"));
-
     }
 
 }

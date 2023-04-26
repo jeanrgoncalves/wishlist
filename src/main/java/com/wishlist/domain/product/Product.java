@@ -21,4 +21,8 @@ public class Product {
     private String description;
     private BigDecimal price;
 
+    public static Product of(String code, String description, BigDecimal price) {
+        return new Product(null, code, description, price);
+    }
+
 }

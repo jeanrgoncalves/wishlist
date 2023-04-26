@@ -13,7 +13,7 @@ public class ClientServiceImpl implements ClientService{
     private final ClientRepository repository;
 
     @Override
-    public void existClientById(String id) {
+    public boolean existClientById(String id) {
         log.info("Verificando se existe cliente com o id {}", id);
 
         var client = repository.findById(id).orElseGet(() -> {
@@ -22,6 +22,7 @@ public class ClientServiceImpl implements ClientService{
         });
 
         log.info("Encontrado cliente: {}", client);
+        return true;
     }
 
 }

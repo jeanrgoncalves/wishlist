@@ -1,11 +1,11 @@
 package com.wishlist.application;
 
-import com.wishlist.domain.product.Product;
 import com.wishlist.domain.wishlist.Wishlist;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,10 +15,14 @@ public class WishlistDto {
 
     private String id;
     private String clientId;
-    private List<Product> products;
+    private List<ProductDto> products;
 
     public static WishlistDto from(Wishlist wishlist) {
-        return new WishlistDto(wishlist.getId(), wishlist.getClientId(), wishlist.getProducts());
+        List<ProductDto> productDtos = new ArrayList<>();
+        for (var product : wishlist.getProducts())
+            productDtos.add(ProductDto.from(product));
+
+        return new WishlistDto(wishlist.getId(), wishlist.getClientId(), productDtos);
     }
 
 }

@@ -3,8 +3,10 @@ package com.wishlist.domain.wishlist;
 import com.wishlist.domain.product.Product;
 import com.wishlist.exception.WishlistMaxSizeException;
 import com.wishlist.util.WishlistUtil;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -17,6 +19,8 @@ import java.util.List;
 @Slf4j
 @Builder
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Wishlist {
 
     @Id

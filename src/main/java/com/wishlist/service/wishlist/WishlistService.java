@@ -11,4 +11,5 @@ public interface WishlistService {
     Wishlist findByClientId(String clientId);
 
     Boolean checkProductExists(String productId, String clientId);
+
 }

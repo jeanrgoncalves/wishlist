@@ -31,7 +31,7 @@ public class WishlistServiceImpl implements WishlistService {
         return wishlist;
     }
 
-    private Wishlist createOrFindWishlistByClientId(String clientId) {
+    public Wishlist createOrFindWishlistByClientId(String clientId) {
         clientService.existClientById(clientId);
         var optWishlist = repository.findByClientId(clientId);
         return optWishlist.orElseGet(() -> Wishlist.builder()
@@ -75,7 +75,7 @@ public class WishlistServiceImpl implements WishlistService {
         return wishlist.checkProductExists(productId);
     }
 
-    private Wishlist executeFindByClientId(String clientId) {
+    public Wishlist executeFindByClientId(String clientId) {
         return repository.findByClientId(clientId).orElseGet(() -> {
             log.error("Wishlist não encontrada para o cliente com id {}", clientId);
             throw new WishlistNotFoundException();
