@@ -1,4 +1,4 @@
-package com.wishlist.application;
+package com.wishlist.application.wishlist;
 
 import com.wishlist.service.wishlist.WishlistService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api/v1/wishlists/products")
@@ -67,6 +69,16 @@ public class WishlistController {
     })
     public ResponseEntity<Boolean> checkProductExists(@PathVariable String productId, @PathVariable String clientId) {
         return ResponseEntity.ok(service.checkProductExists(productId, clientId));
+    }
+
+    @GetMapping
+    @Operation(summary = "Lista todas as Wishlists.")
+    public ResponseEntity<List<WishlistDto>> findAll() {
+        var wishlists = service.findAll();
+        var wishlistDtos = wishlists.stream()
+                .map(WishlistDto::from)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(wishlistDtos);
     }
 
 }

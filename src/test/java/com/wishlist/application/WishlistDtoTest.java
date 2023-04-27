@@ -1,5 +1,6 @@
 package com.wishlist.application;
 
+import com.wishlist.application.wishlist.WishlistDto;
 import com.wishlist.domain.product.Product;
 import com.wishlist.domain.wishlist.Wishlist;
 import org.junit.jupiter.api.Assertions;

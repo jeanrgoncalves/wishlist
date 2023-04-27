@@ -1,10 +1,13 @@
 package com.wishlist.service.client;
 
+import com.wishlist.domain.client.Client;
 import com.wishlist.domain.client.ClientRepository;
 import com.wishlist.exception.ClientNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -23,6 +26,11 @@ public class ClientServiceImpl implements ClientService{
 
         log.info("Encontrado cliente: {}", client);
         return true;
+    }
+
+    @Override
+    public List<Client> findAll() {
+        return repository.findAll();
     }
 
 }

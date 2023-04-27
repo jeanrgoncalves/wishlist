@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Slf4j
 @Service
@@ -24,6 +26,11 @@ public class ProductServiceImpl implements ProductService {
 
         log.info("Encontrado produto: {}", product);
         return product;
+    }
+
+    @Override
+    public List<Product> findAll() {
+        return repository.findAll();
     }
 
 }

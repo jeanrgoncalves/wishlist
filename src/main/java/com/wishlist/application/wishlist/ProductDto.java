@@ -1,4 +1,4 @@
-package com.wishlist.application;
+package com.wishlist.application.wishlist;
 
 import com.wishlist.domain.product.Product;
 import lombok.AllArgsConstructor;
