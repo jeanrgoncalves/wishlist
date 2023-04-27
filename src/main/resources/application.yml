@@ -4,5 +4,5 @@ spring:
   data:
     mongodb:
       host: ${MONGO_HOST:localhost}
-      database: ${MONGO_DB:wishlistDB}
+      database: ${MONGO_DBNAME:wishlistDB}
       port: 27017
