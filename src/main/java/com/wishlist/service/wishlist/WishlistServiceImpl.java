@@ -51,7 +51,7 @@ public class WishlistServiceImpl implements WishlistService {
         });
 
         wishlist.removeProduct(productId);
-        if (wishlist.getProducts().size() == 0) {
+        if (wishlist.getProducts().isEmpty()) {
             repository.deleteById(wishlist.getId());
             log.info("A Wishlist do cliente com id {} foi deletada após remover seu último produto", clientId);
         } else {
