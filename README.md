@@ -8,6 +8,7 @@ Para fazer o build e deploy da aplicação será necessário:
 - IDE (IntelliJ IDEA, por exemplo)
 - Maven
 - MongoDB
+- Docker
 
 ## Banco de Dados e carga inicial
 Antes de fazer o deploy do projeto, instale o MongoDB. O host e o nome do banco de dados serão passados via variáveis de ambiente.
@@ -33,6 +34,16 @@ mvn spring-boot:run
 Alterando as os valores das variáveis de ambiente:
 ```java
 mvn spring-boot:run -Dspring-boot.run.jvmArguments="-DMONGO_HOST=hostName -DMONGO_DBNAME=databaseName"
+```
+
+### Deploy local via Docker
+A aplicação pode ser executada em um container Docker através da imagem disponível no [Docker Hub](https://hub.docker.com/repository/docker/jeanrgoncalves/wishlist)
+```
+docker pull jeanrgoncalves/wishlist:latest
+docker run -p 27017:27017 -p 8080:8080 
+  -e MONGO_HOST=host.docker.internal 
+  -e MONGO_DB_NAME=wishlistDB 
+  jeanrgoncalves/wishlist
 ```
 
 ## Utilização e documentação dos endpoints
